@@ -1,0 +1,12 @@
+c:\Compartilhamentos\RepoGit\WagnerSereia\ClubeRank\ClubeRank\src\backend\ClubeRank.Domain\bin\Debug\net8.0\ClubeRank.Domain.deps.json
+c:\Compartilhamentos\RepoGit\WagnerSereia\ClubeRank\ClubeRank\src\backend\ClubeRank.Domain\bin\Debug\net8.0\ClubeRank.Domain.dll
+c:\Compartilhamentos\RepoGit\WagnerSereia\ClubeRank\ClubeRank\src\backend\ClubeRank.Domain\bin\Debug\net8.0\ClubeRank.Domain.pdb
+c:\Compartilhamentos\RepoGit\WagnerSereia\ClubeRank\ClubeRank\src\backend\ClubeRank.Domain\obj\Debug\net8.0\ClubeRank.Domain.GeneratedMSBuildEditorConfig.editorconfig
+c:\Compartilhamentos\RepoGit\WagnerSereia\ClubeRank\ClubeRank\src\backend\ClubeRank.Domain\obj\Debug\net8.0\ClubeRank.Domain.AssemblyInfoInputs.cache
+c:\Compartilhamentos\RepoGit\WagnerSereia\ClubeRank\ClubeRank\src\backend\ClubeRank.Domain\obj\Debug\net8.0\ClubeRank.Domain.AssemblyInfo.cs
+c:\Compartilhamentos\RepoGit\WagnerSereia\ClubeRank\ClubeRank\src\backend\ClubeRank.Domain\obj\Debug\net8.0\ClubeRank.Domain.csproj.CoreCompileInputs.cache
+c:\Compartilhamentos\RepoGit\WagnerSereia\ClubeRank\ClubeRank\src\backend\ClubeRank.Domain\obj\Debug\net8.0\ClubeRank.Domain.sourcelink.json
+c:\Compartilhamentos\RepoGit\WagnerSereia\ClubeRank\ClubeRank\src\backend\ClubeRank.Domain\obj\Debug\net8.0\ClubeRank.Domain.dll
+c:\Compartilhamentos\RepoGit\WagnerSereia\ClubeRank\ClubeRank\src\backend\ClubeRank.Domain\obj\Debug\net8.0\refint\ClubeRank.Domain.dll
+c:\Compartilhamentos\RepoGit\WagnerSereia\ClubeRank\ClubeRank\src\backend\ClubeRank.Domain\obj\Debug\net8.0\ClubeRank.Domain.pdb
+c:\Compartilhamentos\RepoGit\WagnerSereia\ClubeRank\ClubeRank\src\backend\ClubeRank.Domain\obj\Debug\net8.0\ref\ClubeRank.Domain.dll

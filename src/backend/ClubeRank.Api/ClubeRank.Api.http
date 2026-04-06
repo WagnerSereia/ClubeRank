@@ -1,0 +1,6 @@
+@ClubeRank.Api_HostAddress = http://localhost:5161
+
+GET {{ClubeRank.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
