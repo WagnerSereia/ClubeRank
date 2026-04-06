@@ -1,0 +1,45 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.33505.222
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubeRank.Api", "ClubeRank.Api\ClubeRank.Api.csproj", "{7F2A7D8D-84B5-4E0A-8B01-2D8F6E0965F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubeRank.Application", "ClubeRank.Application\ClubeRank.Application.csproj", "{60E0221D-5A63-45A0-A8F0-BD3C4C1D5A0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubeRank.Domain", "ClubeRank.Domain\ClubeRank.Domain.csproj", "{A0AFD9D7-0F1B-440C-9D69-013F04B27C49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubeRank.Infrastructure", "ClubeRank.Infrastructure\ClubeRank.Infrastructure.csproj", "{FBBD7E8F-3E6B-4E70-8B86-DC60C7B1B4B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubeRank.Infrastructure.Data", "ClubeRank.Infrastructure.Data\ClubeRank.Infrastructure.Data.csproj", "{5494C62E-2FED-4A1C-9D67-6E2B0A79DF0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubeRank.Infrastructure.Identity", "ClubeRank.Infrastructure.Identity\ClubeRank.Infrastructure.Identity.csproj", "{D71B3193-2C25-40C7-A801-6F62D2DEB4E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubeRank.Infrastructure.Storage", "ClubeRank.Infrastructure.Storage\ClubeRank.Infrastructure.Storage.csproj", "{1C0DC59C-1784-4C49-B538-03E6A98B95F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubeRank.Infrastructure.CrossCutting", "ClubeRank.Infrastructure.CrossCutting\ClubeRank.Infrastructure.CrossCutting.csproj", "{E7F93F8F-B0F8-4F94-B992-F5C5F3C9B667}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F2A7D8D-84B5-4E0A-8B01-2D8F6E0965F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F2A7D8D-84B5-4E0A-8B01-2D8F6E0965F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F2A7D8D-84B5-4E0A-8B01-2D8F6E0965F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F2A7D8D-84B5-4E0A-8B01-2D8F6E0965F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60E0221D-5A63-45A0-A8F0-BD3C4C1D5A0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60E0221D-5A63-45A0-A8F0-BD3C4C1D5A0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0AFD9D7-0F1B-440C-9D69-013F04B27C49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0AFD9D7-0F1B-440C-9D69-013F04B27C49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBBD7E8F-3E6B-4E70-8B86-DC60C7B1B4B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5494C62E-2FED-4A1C-9D67-6E2B0A79DF0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5494C62E-2FED-4A1C-9D67-6E2B0A79DF0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D71B3193-2C25-40C7-A801-6F62D2DEB4E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D71B3193-2C25-40C7-A801-6F62D2DEB4E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C0DC59C-1784-4C49-B538-03E6A98B95F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C0DC59C-1784-4C49-B538-03E6A98B95F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7F93F8F-B0F8-4F94-B992-F5C5F3C9B667}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7F93F8F-B0F8-4F94-B992-F5C5F3C9B667}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+EndGlobal
