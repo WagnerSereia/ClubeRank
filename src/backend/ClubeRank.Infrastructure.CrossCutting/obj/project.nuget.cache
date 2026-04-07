@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nXkDBnh77lk=",
+  "dgSpecHash": "LBZgAZsVxbo=",
   "success": true,
-  "projectFilePath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.CrossCutting\\ClubeRank.Infrastructure.CrossCutting.csproj",
+  "projectFilePath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.CrossCutting\\ClubeRank.Infrastructure.CrossCutting.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wsinf\\.nuget\\packages\\mediatr\\14.1.0\\mediatr.14.1.0.nupkg.sha512",
     "C:\\Users\\wsinf\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",

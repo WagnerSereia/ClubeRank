@@ -1,0 +1,540 @@
+<mat-toolbar class="topbar">
+  <div class="brand">
+    <span class="brand-kicker">MVP Fase 1</span>
+    <span class="brand-title">ClubeRank</span>
+  </div>
+
+  <div class="topbar-spacer"></div>
+
+  <ng-container *ngIf="autenticado; else publicBadge">
+    <div class="session-meta">
+      <span>{{ authState.email }}</span>
+      <mat-chip color="primary" highlighted>{{ resumoPerfis }}</mat-chip>
+    </div>
+    <button mat-stroked-button color="primary" type="button" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Sair
+    </button>
+  </ng-container>
+
+  <ng-template #publicBadge>
+    <mat-chip color="accent" highlighted>Angular 17 + Material</mat-chip>
+  </ng-template>
+</mat-toolbar>
+
+<div class="progress-host" *ngIf="carregando">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  <span>{{ mensagemCarregamento }}</span>
+</div>
+
+<main class="page-shell">
+  <section class="hero-panel">
+    <div>
+      <p class="eyebrow">Operação completa do clube em uma única estação de trabalho</p>
+      <h1>Organização, atletas, torneios, confrontos, ranking e auditoria no mesmo fluxo.</h1>
+      <p class="hero-copy">
+        Esta interface cobre o núcleo do MVP da Fase 1. Você cria a organização, autentica com o admin,
+        cadastra atletas, monta torneios, gera confrontos, registra resultados e acompanha ranking e auditoria.
+      </p>
+    </div>
+
+    <div class="hero-metrics">
+      <mat-card>
+        <span class="metric-label">Tenant</span>
+        <strong>{{ authState.tenantId || 'Nao autenticado' }}</strong>
+      </mat-card>
+      <mat-card>
+        <span class="metric-label">Atletas</span>
+        <strong>{{ atletas.length }}</strong>
+      </mat-card>
+      <mat-card>
+        <span class="metric-label">Torneios</span>
+        <strong>{{ torneios.length }}</strong>
+      </mat-card>
+      <mat-card>
+        <span class="metric-label">Eventos auditados</span>
+        <strong>{{ auditorias.length }}</strong>
+      </mat-card>
+    </div>
+  </section>
+
+  <section *ngIf="!autenticado; else workspace">
+    <mat-tab-group animationDuration="0ms">
+      <mat-tab label="Criar organizacao">
+        <mat-card class="surface-card form-card">
+          <h2>Onboarding da organização</h2>
+          <p>Cria o tenant e o administrador padrão do clube.</p>
+
+          <form class="form-grid" [formGroup]="onboardingForm" (ngSubmit)="criarOrganizacao()">
+            <mat-form-field appearance="outline">
+              <mat-label>Nome da organização</mat-label>
+              <input matInput formControlName="nome">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Email da organização</mat-label>
+              <input matInput formControlName="email">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Telefone</mat-label>
+              <input matInput formControlName="telefone">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Modalidade</mat-label>
+              <input matInput formControlName="modalidade">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Plano</mat-label>
+              <mat-select formControlName="plano">
+                <mat-option *ngFor="let plano of planos" [value]="plano">{{ plano }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Administrador</mat-label>
+              <input matInput formControlName="nomeAdministrador">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Senha inicial</mat-label>
+              <input matInput type="password" formControlName="senhaAdministrador">
+            </mat-form-field>
+
+            <div class="action-row full-width">
+              <button mat-flat-button color="primary" type="submit">Criar organização</button>
+            </div>
+          </form>
+        </mat-card>
+      </mat-tab>
+
+      <mat-tab label="Entrar">
+        <mat-card class="surface-card form-card">
+          <h2>Acesso do administrador</h2>
+          <p>Use o login para abrir o workspace do tenant atual.</p>
+
+          <form class="form-grid compact-grid" [formGroup]="loginForm" (ngSubmit)="login()">
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Senha</mat-label>
+              <input matInput type="password" formControlName="password">
+            </mat-form-field>
+
+            <div class="action-row full-width">
+              <button mat-flat-button color="primary" type="submit">Entrar no ClubeRank</button>
+            </div>
+          </form>
+        </mat-card>
+      </mat-tab>
+    </mat-tab-group>
+  </section>
+
+  <ng-template #workspace>
+    <section class="workspace-nav">
+      <button
+        *ngFor="let secao of secoes"
+        mat-stroked-button
+        type="button"
+        [class.active-nav]="secaoAtual === secao"
+        (click)="mudarSecao(secao)">
+        {{ secao | titlecase }}
+      </button>
+    </section>
+
+    <section *ngIf="secaoAtual === 'atletas'" class="section-grid">
+      <mat-card class="surface-card">
+        <h2>Cadastro de atletas</h2>
+        <form class="form-grid" [formGroup]="atletaForm" (ngSubmit)="criarAtleta()">
+          <mat-form-field appearance="outline">
+            <mat-label>Primeiro nome</mat-label>
+            <input matInput formControlName="primeiroNome">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Sobrenome</mat-label>
+            <input matInput formControlName="sobrenome">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Genero</mat-label>
+            <mat-select formControlName="genero">
+              <mat-option *ngFor="let genero of generos" [value]="genero">{{ genero }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Telefone</mat-label>
+            <input matInput formControlName="telefone">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Categoria</mat-label>
+            <mat-select formControlName="categoria">
+              <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="action-row full-width">
+            <button mat-flat-button color="primary" type="submit">Cadastrar atleta</button>
+          </div>
+        </form>
+      </mat-card>
+
+      <mat-card class="surface-card">
+        <h2>Filtros e listagem</h2>
+        <form class="form-grid compact-grid" [formGroup]="atletaFiltroForm" (ngSubmit)="aplicarFiltroAtletas()">
+          <mat-form-field appearance="outline">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="nome">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option value="">Todos</mat-option>
+              <mat-option *ngFor="let status of statusAtleta" [value]="status">{{ status }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Categoria</mat-label>
+            <mat-select formControlName="categoria">
+              <mat-option value="">Todas</mat-option>
+              <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Genero</mat-label>
+            <mat-select formControlName="genero">
+              <mat-option value="">Todos</mat-option>
+              <mat-option *ngFor="let genero of generos" [value]="genero">{{ genero }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="action-row full-width">
+            <button mat-stroked-button color="primary" type="submit">Aplicar filtros</button>
+          </div>
+        </form>
+
+        <div class="stack-list">
+          <article class="entity-card" *ngFor="let atleta of atletas; trackBy: trackById">
+            <div class="entity-copy">
+              <div class="entity-heading">
+                <h3>{{ atleta.nomeCompleto }}</h3>
+                <mat-chip [color]="atleta.status === 'Ativo' ? 'primary' : 'warn'" highlighted>{{ atleta.status }}</mat-chip>
+              </div>
+              <p>{{ atleta.email }} · {{ atleta.genero }} · Categoria {{ atleta.categoria }}</p>
+              <strong>{{ atleta.pontuacaoAtual }} pontos</strong>
+            </div>
+            <div class="entity-actions">
+              <button mat-button type="button" (click)="selecionarAtleta(atleta)">Editar</button>
+              <button mat-button type="button" (click)="alternarStatus(atleta)">
+                {{ atleta.status === 'Ativo' ? 'Inativar' : 'Reativar' }}
+              </button>
+              <mat-form-field appearance="outline">
+                <mat-label>Categoria</mat-label>
+                <mat-select [value]="atleta.categoria" (selectionChange)="alterarCategoria(atleta, $event.value)">
+                  <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </article>
+        </div>
+      </mat-card>
+
+      <mat-card class="surface-card full-span" *ngIf="atletaSelecionado">
+        <h2>Edicao e historico</h2>
+        <div class="split-panel">
+          <form class="form-grid compact-grid" [formGroup]="atletaEdicaoForm" (ngSubmit)="atualizarAtleta()">
+            <mat-form-field appearance="outline">
+              <mat-label>Primeiro nome</mat-label>
+              <input matInput formControlName="primeiroNome">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Sobrenome</mat-label>
+              <input matInput formControlName="sobrenome">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Telefone</mat-label>
+              <input matInput formControlName="telefone">
+            </mat-form-field>
+
+            <div class="action-row full-width">
+              <button mat-flat-button color="primary" type="submit">Salvar edicao</button>
+            </div>
+          </form>
+
+          <div class="history-panel">
+            <article class="history-card" *ngFor="let item of historicoAtleta; trackBy: trackById">
+              <strong>{{ item.motivo }}</strong>
+              <span>{{ item.nomeAdversario || 'Sem adversario' }} · {{ item.resultado || 'Sem resultado' }}</span>
+              <span>{{ item.pontuacaoAntes }} → {{ item.pontuacaoDepois }}</span>
+              <small>{{ item.dataAtualizacao | date:'short' }}</small>
+            </article>
+
+            <p *ngIf="!historicoAtleta.length" class="empty-state">Nenhum historico para o atleta selecionado.</p>
+          </div>
+        </div>
+      </mat-card>
+    </section>
+
+    <section *ngIf="secaoAtual === 'torneios'" class="section-grid">
+      <mat-card class="surface-card">
+        <h2>Novo torneio</h2>
+        <form class="form-grid" [formGroup]="torneioForm" (ngSubmit)="criarTorneio()">
+          <mat-form-field appearance="outline">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="nome">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Tipo</mat-label>
+            <mat-select formControlName="tipo">
+              <mat-option *ngFor="let tipo of tiposTorneio" [value]="tipo">{{ tipo }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Categoria</mat-label>
+            <mat-select formControlName="categoria">
+              <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Descricao</mat-label>
+            <input matInput formControlName="descricao">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Data de inicio</mat-label>
+            <input matInput type="datetime-local" formControlName="dataInicio">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Data de fim</mat-label>
+            <input matInput type="datetime-local" formControlName="dataFim">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Pontuacao vitoria</mat-label>
+            <input matInput type="number" formControlName="pontuacaoVitoria">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Pontuacao derrota</mat-label>
+            <input matInput type="number" formControlName="pontuacaoDerrota">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Pontuacao empate</mat-label>
+            <input matInput type="number" formControlName="pontuacaoEmpate">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Pontuacao WO</mat-label>
+            <input matInput type="number" formControlName="pontuacaoWO">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Permite empate</mat-label>
+            <mat-select formControlName="permiteEmpate">
+              <mat-option [value]="true">Sim</mat-option>
+              <mat-option [value]="false">Nao</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="action-row full-width">
+            <button mat-flat-button color="primary" type="submit">Criar torneio</button>
+          </div>
+        </form>
+      </mat-card>
+
+      <mat-card class="surface-card">
+        <h2>Torneios cadastrados</h2>
+        <div class="stack-list">
+          <article class="entity-card" *ngFor="let torneio of torneios; trackBy: trackById">
+            <div class="entity-copy">
+              <div class="entity-heading">
+                <h3>{{ torneio.nome }}</h3>
+                <mat-chip color="accent" highlighted>{{ torneio.tipo }}</mat-chip>
+              </div>
+              <p>{{ torneio.categoria || 'Sem categoria' }} · {{ torneio.quantidadeAtletas }} atletas</p>
+              <strong>{{ torneio.pontuacaoVitoria }}/{{ torneio.pontuacaoDerrota }}/{{ torneio.pontuacaoWO }}</strong>
+            </div>
+            <div class="entity-actions">
+              <button mat-flat-button color="primary" type="button" (click)="selecionarTorneio(torneio)">Abrir</button>
+            </div>
+          </article>
+        </div>
+      </mat-card>
+
+      <mat-card class="surface-card full-span" *ngIf="torneioSelecionado">
+        <h2>Operacoes do torneio</h2>
+        <div class="split-panel">
+          <div>
+            <form class="form-grid compact-grid" [formGroup]="torneioOperacaoForm" (ngSubmit)="adicionarAtletaAoTorneio()">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Atleta ativo</mat-label>
+                <mat-select formControlName="atletaId">
+                  <mat-option *ngFor="let atleta of atletasAtivos" [value]="atleta.id">
+                    {{ atleta.nomeCompleto }} · {{ atleta.categoria }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <div class="action-row full-width">
+                <button mat-stroked-button color="primary" type="submit">Associar atleta</button>
+                <button mat-flat-button color="primary" type="button" (click)="gerarConfrontos()">Gerar confrontos</button>
+              </div>
+            </form>
+
+            <mat-divider></mat-divider>
+
+            <form class="form-grid compact-grid" [formGroup]="resultadoForm" (ngSubmit)="registrarResultado()">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Confronto agendado</mat-label>
+                <mat-select formControlName="confrontoId">
+                  <mat-option *ngFor="let confronto of confrontosPendentes" [value]="confronto.id">
+                    {{ confronto.nomeAtletaA }} x {{ confronto.nomeAtletaB }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Resultado</mat-label>
+                <mat-select formControlName="tipoResultado">
+                  <mat-option *ngFor="let tipoResultado of tiposResultado" [value]="tipoResultado">{{ tipoResultado }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Justificativa WO</mat-label>
+                <input matInput formControlName="justificativaWO">
+              </mat-form-field>
+
+              <div class="action-row full-width">
+                <button mat-flat-button color="primary" type="submit">Registrar resultado</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="history-panel">
+            <article class="history-card" *ngFor="let confronto of confrontos; trackBy: trackById">
+              <strong>{{ confronto.nomeAtletaA }} x {{ confronto.nomeAtletaB }}</strong>
+              <span>{{ confronto.status }} · {{ confronto.resultado || 'Sem resultado' }}</span>
+              <small>{{ confronto.dataAgendamento | date:'short' }}</small>
+            </article>
+
+            <p *ngIf="!confrontos.length" class="empty-state">Nenhum confronto gerado para o torneio selecionado.</p>
+          </div>
+        </div>
+      </mat-card>
+    </section>
+
+    <section *ngIf="secaoAtual === 'ranking'" class="section-grid">
+      <mat-card class="surface-card">
+        <h2>Ranking em tempo real</h2>
+        <form class="form-grid compact-grid" [formGroup]="rankingFiltroForm" (ngSubmit)="carregarRankingFiltrado()">
+          <mat-form-field appearance="outline">
+            <mat-label>Categoria</mat-label>
+            <mat-select formControlName="categoria">
+              <mat-option value="">Todas</mat-option>
+              <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Genero</mat-label>
+            <mat-select formControlName="genero">
+              <mat-option value="">Todos</mat-option>
+              <mat-option *ngFor="let genero of generos" [value]="genero">{{ genero }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Periodo em dias</mat-label>
+            <input matInput type="number" formControlName="periodoDias">
+          </mat-form-field>
+
+          <div class="action-row full-width">
+            <button mat-stroked-button color="primary" type="submit">Atualizar ranking</button>
+            <button mat-flat-button color="accent" type="button" (click)="aplicarDecaimento()">Aplicar decaimento</button>
+          </div>
+        </form>
+      </mat-card>
+
+      <mat-card class="surface-card full-span">
+        <div class="ranking-grid">
+          <article class="ranking-card" *ngFor="let atleta of ranking; let i = index; trackBy: trackById">
+            <span class="ranking-position">#{{ i + 1 }}</span>
+            <div>
+              <h3>{{ atleta.nomeCompleto }}</h3>
+              <p>{{ atleta.categoria }} · {{ atleta.genero }}</p>
+            </div>
+            <strong>{{ atleta.pontuacaoAtual }}</strong>
+          </article>
+        </div>
+      </mat-card>
+    </section>
+
+    <section *ngIf="secaoAtual === 'auditoria'" class="section-grid">
+      <mat-card class="surface-card">
+        <h2>Consulta de auditoria</h2>
+        <form class="form-grid compact-grid" [formGroup]="auditoriaFiltroForm" (ngSubmit)="carregarAuditoriaFiltrada()">
+          <mat-form-field appearance="outline">
+            <mat-label>Entidade</mat-label>
+            <input matInput formControlName="entidade">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Acao</mat-label>
+            <input matInput formControlName="acao">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Data inicial</mat-label>
+            <input matInput type="date" formControlName="dataInicialUtc">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Data final</mat-label>
+            <input matInput type="date" formControlName="dataFinalUtc">
+          </mat-form-field>
+
+          <div class="action-row full-width">
+            <button mat-flat-button color="primary" type="submit">Filtrar auditoria</button>
+          </div>
+        </form>
+      </mat-card>
+
+      <mat-card class="surface-card full-span">
+        <div class="stack-list">
+          <article class="audit-card" *ngFor="let item of auditorias; trackBy: trackById">
+            <div class="entity-heading">
+              <h3>{{ item.entidade }} · {{ item.acao }}</h3>
+              <mat-chip color="primary" highlighted>{{ item.ip || 'sem ip' }}</mat-chip>
+            </div>
+            <p>{{ item.entidadeId }}</p>
+            <small>{{ item.dataAcao | date:'short' }} · Usuario {{ item.usuarioId || 'sistema' }}</small>
+            <pre *ngIf="item.dadosDepois">{{ item.dadosDepois }}</pre>
+          </article>
+        </div>
+      </mat-card>
+    </section>
+  </ng-template>
+</main>

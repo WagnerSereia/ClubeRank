@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Api\\ClubeRank.Api.csproj": {}
+    "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Api\\ClubeRank.Api.csproj": {}
   },
   "projects": {
-    "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Api\\ClubeRank.Api.csproj": {
+    "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Api\\ClubeRank.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Api\\ClubeRank.Api.csproj",
+        "projectUniqueName": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Api\\ClubeRank.Api.csproj",
         "projectName": "ClubeRank.Api",
-        "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Api\\ClubeRank.Api.csproj",
+        "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Api\\ClubeRank.Api.csproj",
         "packagesPath": "C:\\Users\\wsinf\\.nuget\\packages\\",
-        "outputPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Api\\obj\\",
+        "outputPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,23 +32,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj": {
-                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj"
+              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj": {
+                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj"
               },
-              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.CrossCutting\\ClubeRank.Infrastructure.CrossCutting.csproj": {
-                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.CrossCutting\\ClubeRank.Infrastructure.CrossCutting.csproj"
+              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Data\\ClubeRank.Infrastructure.Data.csproj": {
+                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Data\\ClubeRank.Infrastructure.Data.csproj"
               },
-              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Data\\ClubeRank.Infrastructure.Data.csproj": {
-                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Data\\ClubeRank.Infrastructure.Data.csproj"
-              },
-              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Identity\\ClubeRank.Infrastructure.Identity.csproj": {
-                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Identity\\ClubeRank.Infrastructure.Identity.csproj"
-              },
-              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Storage\\ClubeRank.Infrastructure.Storage.csproj": {
-                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Storage\\ClubeRank.Infrastructure.Storage.csproj"
-              },
-              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure\\ClubeRank.Infrastructure.csproj": {
-                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure\\ClubeRank.Infrastructure.csproj"
+              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure\\ClubeRank.Infrastructure.csproj": {
+                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure\\ClubeRank.Infrastructure.csproj"
               }
             }
           }
@@ -70,6 +61,12 @@
           "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.25, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.25, )"
             },
@@ -101,14 +98,14 @@
         }
       }
     },
-    "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj": {
+    "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj",
+        "projectUniqueName": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj",
         "projectName": "ClubeRank.Application",
-        "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj",
+        "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj",
         "packagesPath": "C:\\Users\\wsinf\\.nuget\\packages\\",
-        "outputPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Application\\obj\\",
+        "outputPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -129,8 +126,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj": {
-                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj"
+              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj": {
+                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj"
               }
             }
           }
@@ -176,14 +173,14 @@
         }
       }
     },
-    "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj": {
+    "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj",
+        "projectUniqueName": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj",
         "projectName": "ClubeRank.Domain",
-        "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj",
+        "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj",
         "packagesPath": "C:\\Users\\wsinf\\.nuget\\packages\\",
-        "outputPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\obj\\",
+        "outputPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -241,86 +238,14 @@
         }
       }
     },
-    "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.CrossCutting\\ClubeRank.Infrastructure.CrossCutting.csproj": {
+    "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Data\\ClubeRank.Infrastructure.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.CrossCutting\\ClubeRank.Infrastructure.CrossCutting.csproj",
-        "projectName": "ClubeRank.Infrastructure.CrossCutting",
-        "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.CrossCutting\\ClubeRank.Infrastructure.CrossCutting.csproj",
-        "packagesPath": "C:\\Users\\wsinf\\.nuget\\packages\\",
-        "outputPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.CrossCutting\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\wsinf\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net8.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
-            "projectReferences": {
-              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj": {
-                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj"
-              },
-              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj": {
-                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
-      },
-      "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.312/PortableRuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Data\\ClubeRank.Infrastructure.Data.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Data\\ClubeRank.Infrastructure.Data.csproj",
+        "projectUniqueName": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Data\\ClubeRank.Infrastructure.Data.csproj",
         "projectName": "ClubeRank.Infrastructure.Data",
-        "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Data\\ClubeRank.Infrastructure.Data.csproj",
+        "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Data\\ClubeRank.Infrastructure.Data.csproj",
         "packagesPath": "C:\\Users\\wsinf\\.nuget\\packages\\",
-        "outputPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Data\\obj\\",
+        "outputPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -341,11 +266,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj": {
-                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj"
+              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj": {
+                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj"
               },
-              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj": {
-                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj"
+              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj": {
+                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj"
+              },
+              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Identity\\ClubeRank.Infrastructure.Identity.csproj": {
+                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Identity\\ClubeRank.Infrastructure.Identity.csproj"
               }
             }
           }
@@ -368,7 +296,17 @@
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[8.0.25, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.25, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.25, )"
             }
           },
           "imports": [
@@ -391,14 +329,14 @@
         }
       }
     },
-    "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Identity\\ClubeRank.Infrastructure.Identity.csproj": {
+    "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Identity\\ClubeRank.Infrastructure.Identity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Identity\\ClubeRank.Infrastructure.Identity.csproj",
+        "projectUniqueName": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Identity\\ClubeRank.Infrastructure.Identity.csproj",
         "projectName": "ClubeRank.Infrastructure.Identity",
-        "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Identity\\ClubeRank.Infrastructure.Identity.csproj",
+        "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Identity\\ClubeRank.Infrastructure.Identity.csproj",
         "packagesPath": "C:\\Users\\wsinf\\.nuget\\packages\\",
-        "outputPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Identity\\obj\\",
+        "outputPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Identity\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -419,11 +357,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj": {
-                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj"
-              },
-              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj": {
-                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj"
+              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj": {
+                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj"
               }
             }
           }
@@ -443,6 +378,20 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.25, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.25, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.25, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -463,86 +412,14 @@
         }
       }
     },
-    "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Storage\\ClubeRank.Infrastructure.Storage.csproj": {
+    "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure\\ClubeRank.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Storage\\ClubeRank.Infrastructure.Storage.csproj",
-        "projectName": "ClubeRank.Infrastructure.Storage",
-        "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Storage\\ClubeRank.Infrastructure.Storage.csproj",
-        "packagesPath": "C:\\Users\\wsinf\\.nuget\\packages\\",
-        "outputPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Storage\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\wsinf\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net8.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
-            "projectReferences": {
-              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj": {
-                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj"
-              },
-              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj": {
-                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
-      },
-      "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.312/PortableRuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure\\ClubeRank.Infrastructure.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure\\ClubeRank.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure\\ClubeRank.Infrastructure.csproj",
         "projectName": "ClubeRank.Infrastructure",
-        "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure\\ClubeRank.Infrastructure.csproj",
+        "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure\\ClubeRank.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\wsinf\\.nuget\\packages\\",
-        "outputPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure\\obj\\",
+        "outputPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -563,11 +440,17 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj": {
-                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj"
+              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj": {
+                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj"
               },
-              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj": {
-                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj"
+              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj": {
+                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj"
+              },
+              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Data\\ClubeRank.Infrastructure.Data.csproj": {
+                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Data\\ClubeRank.Infrastructure.Data.csproj"
+              },
+              "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Identity\\ClubeRank.Infrastructure.Identity.csproj": {
+                "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Infrastructure.Identity\\ClubeRank.Infrastructure.Identity.csproj"
               }
             }
           }

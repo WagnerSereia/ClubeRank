@@ -14,7 +14,7 @@ RUN npm run build --prod
 
 # Runtime stage
 FROM nginx:alpine
-COPY --from=build /app/dist/clube-rank-frontend /usr/share/nginx/html
+COPY --from=build /app/dist/clube-rank-ui/browser /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80

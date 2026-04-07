@@ -3,6 +3,8 @@
   <ItemGroup>
     <ProjectReference Include="..\ClubeRank.Domain\ClubeRank.Domain.csproj" />
     <ProjectReference Include="..\ClubeRank.Application\ClubeRank.Application.csproj" />
+    <ProjectReference Include="..\ClubeRank.Infrastructure.Data\ClubeRank.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\ClubeRank.Infrastructure.Identity\ClubeRank.Infrastructure.Identity.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

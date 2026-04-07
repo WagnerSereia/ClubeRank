@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubeRank.Infrastructure.St
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubeRank.Infrastructure.CrossCutting", "ClubeRank.Infrastructure.CrossCutting\ClubeRank.Infrastructure.CrossCutting.csproj", "{032D614D-CCD8-4197-B5E6-902777037001}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubeRank.Backend.Tests", "..\..\tests\backend\ClubeRank.Backend.Tests\ClubeRank.Backend.Tests.csproj", "{F9E0E245-1FE5-4E74-A5A7-A9646BEF1064}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,18 @@ Global
 		{032D614D-CCD8-4197-B5E6-902777037001}.Release|x64.Build.0 = Release|Any CPU
 		{032D614D-CCD8-4197-B5E6-902777037001}.Release|x86.ActiveCfg = Release|Any CPU
 		{032D614D-CCD8-4197-B5E6-902777037001}.Release|x86.Build.0 = Release|Any CPU
+		{F9E0E245-1FE5-4E74-A5A7-A9646BEF1064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9E0E245-1FE5-4E74-A5A7-A9646BEF1064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9E0E245-1FE5-4E74-A5A7-A9646BEF1064}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F9E0E245-1FE5-4E74-A5A7-A9646BEF1064}.Debug|x64.Build.0 = Debug|Any CPU
+		{F9E0E245-1FE5-4E74-A5A7-A9646BEF1064}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F9E0E245-1FE5-4E74-A5A7-A9646BEF1064}.Debug|x86.Build.0 = Debug|Any CPU
+		{F9E0E245-1FE5-4E74-A5A7-A9646BEF1064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9E0E245-1FE5-4E74-A5A7-A9646BEF1064}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9E0E245-1FE5-4E74-A5A7-A9646BEF1064}.Release|x64.ActiveCfg = Release|Any CPU
+		{F9E0E245-1FE5-4E74-A5A7-A9646BEF1064}.Release|x64.Build.0 = Release|Any CPU
+		{F9E0E245-1FE5-4E74-A5A7-A9646BEF1064}.Release|x86.ActiveCfg = Release|Any CPU
+		{F9E0E245-1FE5-4E74-A5A7-A9646BEF1064}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

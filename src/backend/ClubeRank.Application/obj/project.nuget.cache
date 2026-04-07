@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CALhZZ7RxBI=",
+  "dgSpecHash": "MXWmyCtompI=",
   "success": true,
-  "projectFilePath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj",
+  "projectFilePath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Application\\ClubeRank.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wsinf\\.nuget\\packages\\mediatr\\14.1.0\\mediatr.14.1.0.nupkg.sha512",
     "C:\\Users\\wsinf\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",

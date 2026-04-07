@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClubeRank.Infrastructure.Storage")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5c8900de2c023c88c17e25b282b087b61825d3f6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+93eb342b5349c14099d11ea14195dde7c8296da7")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClubeRank.Infrastructure.Storage")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClubeRank.Infrastructure.Storage")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

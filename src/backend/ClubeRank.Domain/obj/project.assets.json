@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj",
+      "projectUniqueName": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj",
       "projectName": "ClubeRank.Domain",
-      "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj",
+      "projectPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Domain\\ClubeRank.Domain.csproj",
       "packagesPath": "C:\\Users\\wsinf\\.nuget\\packages\\",
-      "outputPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\ClubeRank\\src\\backend\\ClubeRank.Domain\\obj\\",
+      "outputPath": "C:\\Compartilhamentos\\RepoGit\\WagnerSereia\\ClubeRank\\src\\backend\\ClubeRank.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

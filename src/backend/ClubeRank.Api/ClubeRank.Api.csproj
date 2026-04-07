@@ -8,16 +8,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.25" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.25">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ClubeRank.Application\ClubeRank.Application.csproj" />
-    <ProjectReference Include="..\ClubeRank.Infrastructure\ClubeRank.Infrastructure.csproj" />
     <ProjectReference Include="..\ClubeRank.Infrastructure.Data\ClubeRank.Infrastructure.Data.csproj" />
-    <ProjectReference Include="..\ClubeRank.Infrastructure.Identity\ClubeRank.Infrastructure.Identity.csproj" />
-    <ProjectReference Include="..\ClubeRank.Infrastructure.Storage\ClubeRank.Infrastructure.Storage.csproj" />
-    <ProjectReference Include="..\ClubeRank.Infrastructure.CrossCutting\ClubeRank.Infrastructure.CrossCutting.csproj" />
+    <ProjectReference Include="..\ClubeRank.Infrastructure\ClubeRank.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
