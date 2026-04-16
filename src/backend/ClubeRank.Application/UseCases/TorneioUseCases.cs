@@ -44,7 +44,7 @@ public class TorneioUseCases :
             request.Torneio.DataFim.HasValue &&
             request.Torneio.DataInicio.Value > request.Torneio.DataFim.Value)
         {
-            throw new ArgumentException("A data de início do torneio não pode ser maior que a data de fim.");
+            throw new ArgumentException("A data de inicio do torneio nao pode ser maior que a data de fim.");
         }
 
         var torneio = new Torneio(
@@ -63,6 +63,8 @@ public class TorneioUseCases :
             request.Torneio.PontuacaoDerrota,
             request.Torneio.PontuacaoEmpate,
             request.Torneio.PontuacaoWO,
+            request.Torneio.PontuacaoSetVencido,
+            request.Torneio.MelhorDeSets,
             request.Torneio.PermiteEmpate);
 
         await _torneioRepository.Adicionar(torneio);
@@ -74,18 +76,18 @@ public class TorneioUseCases :
         var torneio = await _torneioRepository.ObterPorId(request.Dados.TorneioId);
         if (torneio is null)
         {
-            throw new KeyNotFoundException("Torneio não encontrado");
+            throw new KeyNotFoundException("Torneio nao encontrado");
         }
 
         var atleta = await _atletaRepository.ObterPorId(request.Dados.AtletaId);
         if (atleta is null)
         {
-            throw new KeyNotFoundException("Atleta não encontrado");
+            throw new KeyNotFoundException("Atleta nao encontrado");
         }
 
         if (atleta.OrganizacaoId != torneio.OrganizacaoId)
         {
-            throw new InvalidOperationException("O atleta não pertence à organização do torneio.");
+            throw new InvalidOperationException("O atleta nao pertence a organizacao do torneio.");
         }
 
         if (atleta.Status != StatusAtleta.Ativo)
@@ -102,7 +104,7 @@ public class TorneioUseCases :
         var torneio = await _torneioRepository.ObterPorIdComAtletas(request.Dados.TorneioId);
         if (torneio is null)
         {
-            throw new KeyNotFoundException("Torneio não encontrado");
+            throw new KeyNotFoundException("Torneio nao encontrado");
         }
 
         IEnumerable<Confronto> confrontos;
@@ -117,7 +119,7 @@ public class TorneioUseCases :
         }
         else
         {
-            throw new NotSupportedException($"Tipo de torneio {torneio.Tipo} não suportado nesta fase");
+            throw new NotSupportedException($"Tipo de torneio {torneio.Tipo} nao suportado nesta fase");
         }
 
         foreach (var confronto in confrontos)
@@ -133,19 +135,18 @@ public class TorneioUseCases :
         var confronto = await _confrontoRepository.ObterPorId(request.Dados.ConfrontoId);
         if (confronto is null)
         {
-            throw new KeyNotFoundException("Confronto não encontrado");
+            throw new KeyNotFoundException("Confronto nao encontrado");
         }
 
-        if (request.Dados.TipoResultado == TipoResultado.Empate && confronto.Torneio.Configuracao.PermiteEmpate is false)
+        var resultado = CriarResultado(request.Dados, confronto.Torneio);
+        if (resultado.Tipo == TipoResultado.Empate && confronto.Torneio.Configuracao.PermiteEmpate is false)
         {
-            throw new InvalidOperationException("Empate não é permitido para este torneio.");
+            throw new InvalidOperationException("Empate nao e permitido para este torneio.");
         }
 
-        var resultado = new ResultadoConfronto(request.Dados.TipoResultado, request.Dados.JustificativaWO);
         confronto.RegistrarResultado(resultado);
 
         await _confrontoRepository.Atualizar(confronto);
-
         await _rankingService.AtualizarRankingAposConfronto(confronto, request.Dados.UsuarioId);
     }
 
@@ -183,6 +184,8 @@ public class TorneioUseCases :
             torneio.Configuracao.PontuacaoDerrota,
             torneio.Configuracao.PontuacaoEmpate,
             torneio.Configuracao.PontuacaoWO,
+            torneio.Configuracao.PontuacaoSetVencido,
+            torneio.Configuracao.MelhorDeSets,
             torneio.Configuracao.PermiteEmpate,
             torneio.Atletas.Count,
             torneio.DataCriacao);
@@ -199,7 +202,87 @@ public class TorneioUseCases :
             confronto.TorneioId,
             confronto.Status,
             confronto.Resultado?.Tipo,
+            confronto.Resultado?.TotalSetsVencidosAtletaA ?? 0,
+            confronto.Resultado?.TotalSetsVencidosAtletaB ?? 0,
+            confronto.Resultado?.TotalGamesAtletaA ?? 0,
+            confronto.Resultado?.TotalGamesAtletaB ?? 0,
+            confronto.Resultado?.Sets.Select(MapearSetParaDto).ToArray() ?? [],
             confronto.DataAgendamento,
             confronto.Notas);
+    }
+
+    private static ResultadoConfronto CriarResultado(RegistrarResultadoDto dados, Torneio torneio)
+    {
+        var sets = dados.Sets?
+            .Select(x => new SetConfronto(x.Numero, x.GamesAtletaA, x.GamesAtletaB, x.TieBreak))
+            .ToArray() ?? [];
+
+        ResultadoConfronto resultado;
+
+        if (sets.Length > 0)
+        {
+            resultado = ResultadoConfronto.CriarComSets(sets, dados.JustificativaWO);
+            ValidarFormatoSets(torneio, resultado);
+
+            if (dados.TipoResultado.HasValue && dados.TipoResultado.Value != resultado.Tipo)
+            {
+                throw new InvalidOperationException("O tipo de resultado informado nao corresponde ao placar dos sets.");
+            }
+        }
+        else
+        {
+            if (!dados.TipoResultado.HasValue)
+            {
+                throw new InvalidOperationException("Informe o tipo de resultado ou o placar detalhado dos sets.");
+            }
+
+            resultado = new ResultadoConfronto(dados.TipoResultado.Value, null, dados.JustificativaWO);
+        }
+
+        return resultado;
+    }
+
+    private static void ValidarFormatoSets(Torneio torneio, ResultadoConfronto resultado)
+    {
+        if (resultado.Sets.Count > torneio.Configuracao.MelhorDeSets)
+        {
+            throw new InvalidOperationException($"O confronto aceita no maximo {torneio.Configuracao.MelhorDeSets} sets.");
+        }
+
+        if (resultado.Tipo == TipoResultado.WO)
+        {
+            return;
+        }
+
+        var setsNecessarios = torneio.Configuracao.ObterSetsNecessariosParaVitoria();
+        var setsAtletaA = resultado.TotalSetsVencidosAtletaA;
+        var setsAtletaB = resultado.TotalSetsVencidosAtletaB;
+
+        if (resultado.Tipo == TipoResultado.Empate)
+        {
+            if (!torneio.Configuracao.PermiteEmpate)
+            {
+                throw new InvalidOperationException("Empate nao e permitido para este torneio.");
+            }
+
+            if (setsAtletaA != setsAtletaB)
+            {
+                throw new InvalidOperationException("Empate exige a mesma quantidade de sets vencidos para ambos os atletas.");
+            }
+
+            return;
+        }
+
+        var totalSetsVencedor = Math.Max(setsAtletaA, setsAtletaB);
+        if (totalSetsVencedor != setsNecessarios)
+        {
+            throw new InvalidOperationException(
+                $"Para melhor de {torneio.Configuracao.MelhorDeSets}, o vencedor precisa vencer {setsNecessarios} sets.");
+        }
+    }
+
+    private static SetResultadoDto MapearSetParaDto(SetConfronto set)
+    {
+        return new SetResultadoDto(set.Numero, set.GamesAtletaA, set.GamesAtletaB, set.TieBreak);
     }
 }

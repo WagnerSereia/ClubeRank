@@ -14,6 +14,8 @@ public record CriarTorneioDto(
     int? PontuacaoDerrota = null,
     int? PontuacaoEmpate = null,
     int? PontuacaoWO = null,
+    int? PontuacaoSetVencido = null,
+    int? MelhorDeSets = null,
     bool PermiteEmpate = false
 );
 
@@ -31,6 +33,8 @@ public record TorneioDto(
     int PontuacaoDerrota,
     int PontuacaoEmpate,
     int PontuacaoWO,
+    int PontuacaoSetVencido,
+    int MelhorDeSets,
     bool PermiteEmpate,
     int QuantidadeAtletas,
     DateTime DataCriacao
@@ -54,13 +58,26 @@ public record ConfrontoDto(
     Guid TorneioId,
     StatusConfronto Status,
     TipoResultado? Resultado,
+    int TotalSetsAtletaA,
+    int TotalSetsAtletaB,
+    int TotalGamesAtletaA,
+    int TotalGamesAtletaB,
+    IReadOnlyCollection<SetResultadoDto> Sets,
     DateTime DataAgendamento,
     string? Notas
 );
 
 public record RegistrarResultadoDto(
     Guid ConfrontoId,
-    TipoResultado TipoResultado,
+    TipoResultado? TipoResultado,
+    IReadOnlyCollection<SetResultadoDto>? Sets,
     string? JustificativaWO,
     Guid UsuarioId
+);
+
+public record SetResultadoDto(
+    int Numero,
+    int GamesAtletaA,
+    int GamesAtletaB,
+    bool TieBreak = false
 );

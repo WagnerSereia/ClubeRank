@@ -12,6 +12,7 @@ namespace ClubeRank.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[ApiExplorerSettings(GroupName = "competicoes")]
 [Authorize(Roles = $"{nameof(PerfilUsuario.SuperAdmin)},{nameof(PerfilUsuario.AdminOrganizacao)},{nameof(PerfilUsuario.GestorConfrontos)},{nameof(PerfilUsuario.Auditor)}")]
 public class TorneiosController : ControllerBase
 {
@@ -74,6 +75,8 @@ public class TorneiosController : ControllerBase
                 request.PontuacaoDerrota,
                 request.PontuacaoEmpate,
                 request.PontuacaoWO,
+                request.PontuacaoSetVencido,
+                request.MelhorDeSets,
                 request.PermiteEmpate)));
             var usuarioId = User.GetUserIdOrSystem();
             await auditoriaService.RegistrarAsync(
@@ -191,6 +194,8 @@ public class TorneiosController : ControllerBase
         int? PontuacaoDerrota,
         int? PontuacaoEmpate,
         int? PontuacaoWO,
+        int? PontuacaoSetVencido,
+        int? MelhorDeSets,
         bool PermiteEmpate = false);
 
     public record AddAtletaTorneioRequest(Guid AtletaId);

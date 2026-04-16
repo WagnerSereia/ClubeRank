@@ -22,15 +22,18 @@ public class AtletaUseCases :
 {
     private readonly IAtletaRepository _atletaRepository;
     private readonly IHistoricoRankingRepository _historicoRepository;
+    private readonly IConfrontoRepository _confrontoRepository;
     private readonly IRankingService _rankingService;
 
     public AtletaUseCases(
         IAtletaRepository atletaRepository,
         IHistoricoRankingRepository historicoRepository,
+        IConfrontoRepository confrontoRepository,
         IRankingService rankingService)
     {
         _atletaRepository = atletaRepository;
         _historicoRepository = historicoRepository;
+        _confrontoRepository = confrontoRepository;
         _rankingService = rankingService;
     }
 
@@ -42,7 +45,7 @@ public class AtletaUseCases :
         var emailJaExiste = await _atletaRepository.ExisteEmailNaOrganizacao(request.Atleta.OrganizacaoId, email.Valor);
         if (emailJaExiste)
         {
-            throw new InvalidOperationException("Já existe atleta com este email na organização.");
+            throw new InvalidOperationException("Ja existe atleta com este email na organizacao.");
         }
 
         var atleta = new Atleta(
@@ -62,7 +65,7 @@ public class AtletaUseCases :
         var atleta = await _atletaRepository.ObterPorId(request.Atleta.Id);
         if (atleta is null)
         {
-            throw new KeyNotFoundException("Atleta não encontrado");
+            throw new KeyNotFoundException("Atleta nao encontrado");
         }
 
         var nome = new NomeCompleto(request.Atleta.PrimeiroNome, request.Atleta.Sobrenome);
@@ -76,7 +79,7 @@ public class AtletaUseCases :
         var atleta = await _atletaRepository.ObterPorId(request.AtletaId);
         if (atleta is null)
         {
-            throw new KeyNotFoundException("Atleta não encontrado");
+            throw new KeyNotFoundException("Atleta nao encontrado");
         }
 
         atleta.Inativar();
@@ -88,7 +91,7 @@ public class AtletaUseCases :
         var atleta = await _atletaRepository.ObterPorId(request.AtletaId);
         if (atleta is null)
         {
-            throw new KeyNotFoundException("Atleta não encontrado");
+            throw new KeyNotFoundException("Atleta nao encontrado");
         }
 
         atleta.Ativar();
@@ -100,7 +103,7 @@ public class AtletaUseCases :
         var atleta = await _atletaRepository.ObterPorId(request.AtletaId);
         if (atleta is null)
         {
-            throw new KeyNotFoundException("Atleta não encontrado");
+            throw new KeyNotFoundException("Atleta nao encontrado");
         }
 
         atleta.AlterarCategoria(request.Categoria);
@@ -125,7 +128,7 @@ public class AtletaUseCases :
             request.Filtros.Ordenacao);
 
         var atletas = await _atletaRepository.Listar(filtros);
-        return atletas.Select(MapearParaDto);
+        return atletas.Select(x => MapearParaDto(x));
     }
 
     public async Task<IEnumerable<AtletaDto>> Handle(ObterRankingQuery request, CancellationToken cancellationToken)
@@ -135,14 +138,31 @@ public class AtletaUseCases :
             request.Categoria,
             request.Genero)).ToList();
 
+        DateTime? dataInicial = null;
         if (request.PeriodoDias.HasValue && request.PeriodoDias.Value > 0)
         {
-            var dataInicial = DateTime.UtcNow.AddDays(-request.PeriodoDias.Value);
-            var atletaIdsNoPeriodo = await _historicoRepository.ObterAtletaIdsComHistoricoNoPeriodo(request.OrganizacaoId, dataInicial);
+            dataInicial = DateTime.UtcNow.AddDays(-request.PeriodoDias.Value);
+            var atletaIdsNoPeriodo = await _historicoRepository.ObterAtletaIdsComHistoricoNoPeriodo(request.OrganizacaoId, dataInicial.Value);
             atletas = atletas.Where(x => atletaIdsNoPeriodo.Contains(x.Id)).ToList();
         }
 
-        return atletas.Select(MapearParaDto);
+        var confrontos = await _confrontoRepository.ListarRealizadosPorOrganizacao(request.OrganizacaoId);
+        if (dataInicial.HasValue)
+        {
+            confrontos = confrontos.Where(x => x.DataAgendamento >= dataInicial.Value).ToArray();
+        }
+
+        var estatisticas = CalcularEstatisticasRanking(atletas.Select(x => x.Id), confrontos);
+
+        return atletas
+            .OrderByDescending(x => x.PontuacaoAtual.Valor)
+            .ThenByDescending(x => estatisticas.GetValueOrDefault(x.Id)?.TotalSetsVencidos ?? 0)
+            .ThenByDescending(x => estatisticas.GetValueOrDefault(x.Id)?.SaldoGames ?? 0)
+            .ThenByDescending(x => estatisticas.GetValueOrDefault(x.Id)?.TotalGamesVencidos ?? 0)
+            .ThenBy(x => x.Nome.PrimeiroNome)
+            .ThenBy(x => x.Nome.Sobrenome)
+            .Select(x => MapearParaDto(x, estatisticas.GetValueOrDefault(x.Id)))
+            .ToArray();
     }
 
     public async Task<IEnumerable<HistoricoRankingDto>> Handle(ObterHistoricoAtletaQuery request, CancellationToken cancellationToken)
@@ -151,7 +171,7 @@ public class AtletaUseCases :
         return historicos.Select(h => MapearHistoricoParaDto(h, request.AtletaId));
     }
 
-    private static AtletaDto MapearParaDto(Atleta atleta)
+    private static AtletaDto MapearParaDto(Atleta atleta, RankingEstatisticaDto? estatistica = null)
     {
         return new AtletaDto(
             atleta.Id,
@@ -162,6 +182,9 @@ public class AtletaUseCases :
             atleta.Status,
             atleta.Categoria,
             atleta.PontuacaoAtual.Valor,
+            estatistica?.TotalSetsVencidos ?? 0,
+            estatistica?.TotalGamesVencidos ?? 0,
+            estatistica?.SaldoGames ?? 0,
             atleta.PontuacaoAtual.DataAtualizacao,
             atleta.OrganizacaoId,
             atleta.DataCriacao);
@@ -199,4 +222,49 @@ public class AtletaUseCases :
 
         return null;
     }
+
+    private static Dictionary<Guid, RankingEstatisticaDto> CalcularEstatisticasRanking(
+        IEnumerable<Guid> atletaIds,
+        IEnumerable<Confronto> confrontos)
+    {
+        var filtroAtletas = atletaIds.ToHashSet();
+        var estatisticas = filtroAtletas.ToDictionary(
+            atletaId => atletaId,
+            _ => new RankingEstatisticaDto(0, 0, 0));
+
+        foreach (var confronto in confrontos.Where(x => x.Resultado is not null))
+        {
+            AcumularEstatisticas(estatisticas, filtroAtletas, confronto.AtletaAId, confronto.Resultado!.TotalSetsVencidosAtletaA, confronto.Resultado.TotalGamesAtletaA, confronto.Resultado.TotalGamesAtletaA - confronto.Resultado.TotalGamesAtletaB);
+            AcumularEstatisticas(estatisticas, filtroAtletas, confronto.AtletaBId, confronto.Resultado!.TotalSetsVencidosAtletaB, confronto.Resultado.TotalGamesAtletaB, confronto.Resultado.TotalGamesAtletaB - confronto.Resultado.TotalGamesAtletaA);
+        }
+
+        return estatisticas;
+    }
+
+    private static void AcumularEstatisticas(
+        Dictionary<Guid, RankingEstatisticaDto> estatisticas,
+        HashSet<Guid> filtroAtletas,
+        Guid atletaId,
+        int setsVencidos,
+        int gamesVencidos,
+        int saldoGames)
+    {
+        if (!filtroAtletas.Contains(atletaId))
+        {
+            return;
+        }
+
+        var atual = estatisticas[atletaId];
+        estatisticas[atletaId] = atual with
+        {
+            TotalSetsVencidos = atual.TotalSetsVencidos + setsVencidos,
+            TotalGamesVencidos = atual.TotalGamesVencidos + gamesVencidos,
+            SaldoGames = atual.SaldoGames + saldoGames
+        };
+    }
+
+    private record RankingEstatisticaDto(
+        int TotalSetsVencidos,
+        int TotalGamesVencidos,
+        int SaldoGames);
 }

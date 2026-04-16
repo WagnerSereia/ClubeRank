@@ -365,3 +365,39 @@ Se Índice Atual ≥ 0.8: +10 pontos para qualquer pareamento válido
 | **Torneio** | RN4.1-4.4 | Estrutura e ciclo de vida |
 | **Transparência** | RN5.1-5.3 | Auditoria e confiabilidade |
 | **Operação** | RN6.1-6.3 | Limites técnicos e operacionais |
+## Atualizacao 2026-04 - Placares por Set e Game
+
+### RN3.5 - Registro Detalhado de Placar
+- O resultado de um confronto pode ser informado por placar detalhado de sets.
+- Cada set deve registrar:
+  - numero do set
+  - games do atleta A
+  - games do atleta B
+  - indicador de tie-break quando aplicavel
+- Quando houver placar detalhado, o sistema deve inferir automaticamente o vencedor do confronto.
+- WO continua exigindo justificativa e nao deve conter sets.
+
+### RN3.6 - Formato Melhor de N Sets
+- Cada torneio pode configurar o formato `melhor de N sets`.
+- `N` deve ser impar e maior que zero.
+- O vencedor do confronto precisa atingir `(N / 2) + 1` sets vencidos.
+- Exemplo padrao do MVP: `melhor de 3 sets`.
+
+### RN4.5 - Pontuacao por Set Vencido
+- Alem da pontuacao base de vitoria, derrota, empate e WO, o torneio pode configurar `pontuacao por set vencido`.
+- Essa pontuacao e aplicada individualmente a cada atleta conforme a quantidade de sets ganhos no confronto.
+- Exemplo:
+  - vitoria = +10
+  - derrota = -5
+  - set vencido = +2
+  - placar 2x1 em sets
+  - vencedor recebe `+14`
+  - perdedor recebe `-3`
+
+### RN3.7 - Desempate de Ranking
+- Em empate de pontuacao no ranking, a ordenacao deve considerar:
+  1. maior total de sets vencidos
+  2. melhor saldo de games
+  3. maior total de games vencidos
+  4. menor numero de WO
+  5. data de cadastro mais antiga

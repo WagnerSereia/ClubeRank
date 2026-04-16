@@ -1,6 +1,9 @@
 using ClubeRank.Domain.Entities;
+using ClubeRank.Domain.ValueObjects;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Text.Json;
 
 namespace ClubeRank.Infrastructure.Data.Configurations;
 
@@ -38,6 +41,11 @@ public class ConfrontoConfiguration : IEntityTypeConfiguration<Confronto>
 
         builder.OwnsOne(x => x.Resultado, resultado =>
         {
+            var setsComparer = new ValueComparer<List<SetConfronto>>(
+                (left, right) => ReferenceEquals(left, right) || (left != null && right != null && left.SequenceEqual(right)),
+                sets => sets == null ? 0 : sets.Aggregate(0, (hash, item) => HashCode.Combine(hash, item.GetHashCode())),
+                sets => sets == null ? new List<SetConfronto>() : sets.Select(x => new SetConfronto(x.Numero, x.GamesAtletaA, x.GamesAtletaB, x.TieBreak)).ToList());
+
             resultado.Property(x => x.Tipo)
                 .HasColumnName("TipoResultado")
                 .HasConversion<string>()
@@ -47,6 +55,14 @@ public class ConfrontoConfiguration : IEntityTypeConfiguration<Confronto>
                 .HasMaxLength(1000);
             resultado.Property(x => x.DataRegistro)
                 .HasColumnName("DataRegistroResultado");
+            resultado.Property(x => x.Sets)
+                .HasColumnName("SetsJson")
+                .HasConversion(
+                    sets => JsonSerializer.Serialize(sets, (JsonSerializerOptions?)null),
+                    json => string.IsNullOrWhiteSpace(json)
+                        ? new List<SetConfronto>()
+                        : JsonSerializer.Deserialize<List<SetConfronto>>(json, (JsonSerializerOptions?)null) ?? new List<SetConfronto>())
+                .Metadata.SetValueComparer(setsComparer);
         });
     }
 }

@@ -27,6 +27,8 @@ public class TorneioConfiguration : IEntityTypeConfiguration<Torneio>
             config.Property(x => x.PontuacaoDerrota).HasColumnName("PontuacaoDerrota");
             config.Property(x => x.PontuacaoEmpate).HasColumnName("PontuacaoEmpate");
             config.Property(x => x.PontuacaoWO).HasColumnName("PontuacaoWO");
+            config.Property(x => x.PontuacaoSetVencido).HasColumnName("PontuacaoSetVencido");
+            config.Property(x => x.MelhorDeSets).HasColumnName("MelhorDeSets");
             config.Property(x => x.PermiteEmpate).HasColumnName("PermiteEmpate");
         });
 

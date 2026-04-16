@@ -11,6 +11,7 @@ namespace ClubeRank.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[ApiExplorerSettings(GroupName = "competicoes")]
 [Authorize(Roles = $"{nameof(PerfilUsuario.SuperAdmin)},{nameof(PerfilUsuario.AdminOrganizacao)},{nameof(PerfilUsuario.GestorConfrontos)}")]
 public class ResultadosController : ControllerBase
 {
@@ -33,6 +34,7 @@ public class ResultadosController : ControllerBase
             await mediator.Send(new RegistrarResultadoCommand(new RegistrarResultadoDto(
                 request.ConfrontoId,
                 request.TipoResultado,
+                request.Sets?.Select(x => new SetResultadoDto(x.Numero, x.GamesAtletaA, x.GamesAtletaB, x.TieBreak)).ToArray(),
                 request.JustificativaWO?.Trim(),
                 userId)));
             var tenantId = User.GetTenantIdOrNull();
@@ -61,6 +63,13 @@ public class ResultadosController : ControllerBase
 
     public record RegisterResultadoRequest(
         Guid ConfrontoId,
-        TipoResultado TipoResultado,
+        TipoResultado? TipoResultado,
+        IReadOnlyCollection<SetRequest>? Sets,
         string? JustificativaWO);
+
+    public record SetRequest(
+        int Numero,
+        int GamesAtletaA,
+        int GamesAtletaB,
+        bool TieBreak = false);
 }

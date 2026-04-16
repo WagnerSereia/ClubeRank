@@ -8,6 +8,7 @@ namespace ClubeRank.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[ApiExplorerSettings(GroupName = "auditoria")]
 [Authorize(Roles = $"{nameof(PerfilUsuario.SuperAdmin)},{nameof(PerfilUsuario.AdminOrganizacao)},{nameof(PerfilUsuario.Auditor)}")]
 public class AuditoriaController : ControllerBase
 {

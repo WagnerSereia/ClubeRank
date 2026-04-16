@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClubeRank.Infrastructure.Identity")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+93eb342b5349c14099d11ea14195dde7c8296da7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e7c494640a228d8d5d1fe36ff0e4a700bff119c7")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClubeRank.Infrastructure.Identity")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClubeRank.Infrastructure.Identity")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

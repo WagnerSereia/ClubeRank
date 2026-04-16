@@ -13,6 +13,7 @@ namespace ClubeRank.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[ApiExplorerSettings(GroupName = "atletas")]
 [Authorize(Roles = $"{nameof(PerfilUsuario.SuperAdmin)},{nameof(PerfilUsuario.AdminOrganizacao)},{nameof(PerfilUsuario.GestorAtletas)},{nameof(PerfilUsuario.Auditor)}")]
 public class AtletasController : ControllerBase
 {

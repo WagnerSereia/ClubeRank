@@ -55,6 +55,7 @@ public interface IConfrontoRepository
     Task<Confronto?> ObterPorId(Guid id);
     Task Adicionar(Confronto confronto);
     Task Atualizar(Confronto confronto);
+    Task<IEnumerable<Confronto>> ListarRealizadosPorOrganizacao(Guid organizacaoId);
     Task<IEnumerable<Confronto>> ObterConfrontosEntreAtletasNoTorneio(Guid atletaAId, Guid atletaBId, Guid torneioId);
     Task<IEnumerable<Confronto>> ObterConfrontosDoAtletaNaData(Guid atletaId, DateTime data);
     Task<IEnumerable<Confronto>> ObterHistoricoConfrontosEntreAtletas(Guid atletaAId, Guid atletaBId, int limite);

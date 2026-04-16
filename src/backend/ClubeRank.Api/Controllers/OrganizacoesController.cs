@@ -15,6 +15,7 @@ namespace ClubeRank.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[ApiExplorerSettings(GroupName = "organizacoes")]
 public class OrganizacoesController : ControllerBase
 {
     [AllowAnonymous]

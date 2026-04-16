@@ -41,6 +41,12 @@ public class ApiWorkflowTests : IClassFixture<ApiProcessFixture>
         {
             confrontoId = confronto.Id,
             tipoResultado = TipoResultado.VitoriaAtletaA.ToString(),
+            sets = new[]
+            {
+                new { numero = 1, gamesAtletaA = 6, gamesAtletaB = 4, tieBreak = false },
+                new { numero = 2, gamesAtletaA = 3, gamesAtletaB = 6, tieBreak = false },
+                new { numero = 3, gamesAtletaA = 10, gamesAtletaB = 8, tieBreak = true }
+            },
             justificativaWO = (string?)null
         });
 
@@ -55,8 +61,8 @@ public class ApiWorkflowTests : IClassFixture<ApiProcessFixture>
         var ranking = await rankingResponse.Content.ReadFromJsonAsync<List<AtletaResponse>>();
         Assert.NotNull(ranking);
         Assert.Equal(2, ranking!.Count);
-        Assert.Equal(1010, ranking.Single(x => x.Id == vencedorEsperadoId).PontuacaoAtual);
-        Assert.Equal(995, ranking.Single(x => x.Id == perdedorEsperadoId).PontuacaoAtual);
+        Assert.Equal(1014, ranking.Single(x => x.Id == vencedorEsperadoId).PontuacaoAtual);
+        Assert.Equal(997, ranking.Single(x => x.Id == perdedorEsperadoId).PontuacaoAtual);
     }
 
     [Fact]
@@ -216,6 +222,8 @@ public class ApiWorkflowTests : IClassFixture<ApiProcessFixture>
             pontuacaoDerrota = -5,
             pontuacaoEmpate = 0,
             pontuacaoWO = -20,
+            pontuacaoSetVencido = 2,
+            melhorDeSets = 3,
             permiteEmpate = true
         });
 

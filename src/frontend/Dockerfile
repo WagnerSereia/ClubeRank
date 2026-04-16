@@ -4,13 +4,14 @@ WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
+RUN npm pkg delete devDependencies.node
 RUN npm ci
 
 # Copy source code
 COPY . .
 
 # Build the application
-RUN npm run build --prod
+RUN node ./node_modules/@angular/cli/bin/ng.js build --configuration production
 
 # Runtime stage
 FROM nginx:alpine

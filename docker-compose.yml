@@ -1,0 +1,30 @@
+services:
+  cluberank-api:
+    build:
+      context: ./src/backend
+      dockerfile: Dockerfile
+    container_name: cluberank-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+    ports:
+      - "5175:8080"
+    networks:
+      - infra_local_network
+    restart: unless-stopped
+
+  cluberank-ui:
+    build:
+      context: ./src/frontend
+      dockerfile: Dockerfile
+    container_name: cluberank-ui
+    ports:
+      - "4200:80"
+    depends_on:
+      - cluberank-api
+    restart: unless-stopped
+
+networks:
+  infra_local_network:
+    external: true
+    name: ambientelocal_infra_local_network

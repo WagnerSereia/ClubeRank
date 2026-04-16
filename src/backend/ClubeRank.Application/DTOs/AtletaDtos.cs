@@ -28,6 +28,9 @@ public record AtletaDto(
     StatusAtleta Status,
     Categoria Categoria,
     int PontuacaoAtual,
+    int TotalSetsVencidos,
+    int TotalGamesVencidos,
+    int SaldoGames,
     DateTime DataAtualizacaoPontuacao,
     Guid OrganizacaoId,
     DateTime DataCriacao

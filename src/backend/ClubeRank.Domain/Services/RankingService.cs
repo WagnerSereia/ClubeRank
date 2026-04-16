@@ -40,17 +40,26 @@ public class RankingService : IRankingService
 
         if (atletaA is null || atletaB is null)
         {
-            throw new InvalidOperationException("Atletas não encontrados");
+            throw new InvalidOperationException("Atletas nao encontrados");
         }
 
         var organizacao = await _organizacaoRepository.ObterPorId(atletaA.OrganizacaoId);
         if (organizacao is null)
         {
-            throw new InvalidOperationException("Organização não encontrada");
+            throw new InvalidOperationException("Organizacao nao encontrada");
         }
+
+        var configuracaoTorneio = confronto.Torneio?.Configuracao;
+        var pontuacaoVitoria = configuracaoTorneio?.PontuacaoVitoria ?? organizacao.Configuracao.PontuacaoVitoria;
+        var pontuacaoDerrota = configuracaoTorneio?.PontuacaoDerrota ?? organizacao.Configuracao.PontuacaoDerrota;
+        var pontuacaoEmpate = configuracaoTorneio?.PontuacaoEmpate ?? organizacao.Configuracao.PontuacaoEmpate;
+        var pontuacaoWo = configuracaoTorneio?.PontuacaoWO ?? organizacao.Configuracao.PontuacaoWO;
+        var pontuacaoSetVencido = configuracaoTorneio?.PontuacaoSetVencido ?? 0;
 
         var pontuacaoAntesA = atletaA.PontuacaoAtual;
         var pontuacaoAntesB = atletaB.PontuacaoAtual;
+        var bonusSetsAtletaA = confronto.Resultado.TotalSetsVencidosAtletaA * pontuacaoSetVencido;
+        var bonusSetsAtletaB = confronto.Resultado.TotalSetsVencidosAtletaB * pontuacaoSetVencido;
 
         int variacaoA;
         int variacaoB;
@@ -60,31 +69,31 @@ public class RankingService : IRankingService
         switch (confronto.Resultado.Tipo)
         {
             case TipoResultado.VitoriaAtletaA:
-                variacaoA = AplicarVariacaoMinima(organizacao.Configuracao.PontuacaoVitoria, 1);
-                variacaoB = AplicarVariacaoMinima(organizacao.Configuracao.PontuacaoDerrota, -1);
-                motivoA = $"Vitória sobre {atletaB.Nome.NomeFormatado}";
+                variacaoA = AplicarVariacaoMinima(pontuacaoVitoria + bonusSetsAtletaA, 1);
+                variacaoB = AplicarVariacaoMinima(pontuacaoDerrota + bonusSetsAtletaB, -1);
+                motivoA = $"Vitoria sobre {atletaB.Nome.NomeFormatado}";
                 motivoB = $"Derrota para {atletaA.Nome.NomeFormatado}";
                 break;
             case TipoResultado.VitoriaAtletaB:
-                variacaoA = AplicarVariacaoMinima(organizacao.Configuracao.PontuacaoDerrota, -1);
-                variacaoB = AplicarVariacaoMinima(organizacao.Configuracao.PontuacaoVitoria, 1);
+                variacaoA = AplicarVariacaoMinima(pontuacaoDerrota + bonusSetsAtletaA, -1);
+                variacaoB = AplicarVariacaoMinima(pontuacaoVitoria + bonusSetsAtletaB, 1);
                 motivoA = $"Derrota para {atletaB.Nome.NomeFormatado}";
-                motivoB = $"Vitória sobre {atletaA.Nome.NomeFormatado}";
+                motivoB = $"Vitoria sobre {atletaA.Nome.NomeFormatado}";
                 break;
             case TipoResultado.Empate:
-                variacaoA = AplicarVariacaoMinima(organizacao.Configuracao.PontuacaoEmpate, 1);
-                variacaoB = AplicarVariacaoMinima(organizacao.Configuracao.PontuacaoEmpate, 1);
+                variacaoA = AplicarVariacaoMinima(pontuacaoEmpate + bonusSetsAtletaA, 1);
+                variacaoB = AplicarVariacaoMinima(pontuacaoEmpate + bonusSetsAtletaB, 1);
                 motivoA = $"Empate com {atletaB.Nome.NomeFormatado}";
                 motivoB = $"Empate com {atletaA.Nome.NomeFormatado}";
                 break;
             case TipoResultado.WO:
-                variacaoA = AplicarVariacaoMinima(organizacao.Configuracao.PontuacaoVitoria, 1);
-                variacaoB = AplicarVariacaoMinima(organizacao.Configuracao.PontuacaoWO, -1);
-                motivoA = $"Vitória por WO sobre {atletaB.Nome.NomeFormatado}";
+                variacaoA = AplicarVariacaoMinima(pontuacaoVitoria, 1);
+                variacaoB = AplicarVariacaoMinima(pontuacaoWo, -1);
+                motivoA = $"Vitoria por WO sobre {atletaB.Nome.NomeFormatado}";
                 motivoB = $"Derrota por WO para {atletaA.Nome.NomeFormatado}";
                 break;
             default:
-                throw new InvalidOperationException("Tipo de resultado inválido");
+                throw new InvalidOperationException("Tipo de resultado invalido");
         }
 
         var novaPontuacaoA = AplicarLimitesPontuacao(

@@ -196,6 +196,15 @@ internal sealed class FakeConfrontoRepository : IConfrontoRepository
         return Task.CompletedTask;
     }
 
+    public Task<IEnumerable<Confronto>> ListarRealizadosPorOrganizacao(Guid organizacaoId)
+    {
+        var confrontos = _confrontos.Values
+            .Where(x => x.TenantId == organizacaoId && x.Status == StatusConfronto.Realizado)
+            .ToArray();
+
+        return Task.FromResult<IEnumerable<Confronto>>(confrontos);
+    }
+
     public Task<IEnumerable<Confronto>> ObterConfrontosEntreAtletasNoTorneio(Guid atletaAId, Guid atletaBId, Guid torneioId)
     {
         var confrontos = _confrontos.Values.Where(x =>

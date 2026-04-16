@@ -45,6 +45,8 @@ public class Torneio : Entity
         int? pontuacaoDerrota,
         int? pontuacaoEmpate,
         int? pontuacaoWo,
+        int? pontuacaoSetVencido,
+        int? melhorDeSets,
         bool permiteEmpate)
     {
         Configuracao = Configuracao.Atualizar(
@@ -52,6 +54,8 @@ public class Torneio : Entity
             pontuacaoDerrota,
             pontuacaoEmpate,
             pontuacaoWo,
+            pontuacaoSetVencido,
+            melhorDeSets,
             permiteEmpate);
 
         Atualizar();
@@ -124,6 +128,8 @@ public class ConfiguracaoTorneio : ValueObject
     public int PontuacaoDerrota { get; private set; }
     public int PontuacaoEmpate { get; private set; }
     public int PontuacaoWO { get; private set; }
+    public int PontuacaoSetVencido { get; private set; }
+    public int MelhorDeSets { get; private set; }
     public bool PermiteEmpate { get; private set; }
 
     public ConfiguracaoTorneio()
@@ -132,6 +138,8 @@ public class ConfiguracaoTorneio : ValueObject
         PontuacaoDerrota = -5;
         PontuacaoEmpate = 0;
         PontuacaoWO = -20;
+        PontuacaoSetVencido = 0;
+        MelhorDeSets = 3;
         PermiteEmpate = false;
     }
 
@@ -140,18 +148,33 @@ public class ConfiguracaoTorneio : ValueObject
         int? pontuacaoDerrota,
         int? pontuacaoEmpate,
         int? pontuacaoWo,
+        int? pontuacaoSetVencido,
+        int? melhorDeSets,
         bool permiteEmpate)
     {
+        var melhorDeSetsCalculado = melhorDeSets ?? MelhorDeSets;
+        if (melhorDeSetsCalculado <= 0 || melhorDeSetsCalculado % 2 == 0)
+        {
+            throw new ArgumentException("A configuracao de melhor de sets deve ser um numero impar maior que zero.", nameof(melhorDeSets));
+        }
+
         var configuracao = new ConfiguracaoTorneio
         {
             PontuacaoVitoria = pontuacaoVitoria ?? PontuacaoVitoria,
             PontuacaoDerrota = pontuacaoDerrota ?? PontuacaoDerrota,
             PontuacaoEmpate = pontuacaoEmpate ?? PontuacaoEmpate,
             PontuacaoWO = pontuacaoWo ?? PontuacaoWO,
+            PontuacaoSetVencido = pontuacaoSetVencido ?? PontuacaoSetVencido,
+            MelhorDeSets = melhorDeSetsCalculado,
             PermiteEmpate = permiteEmpate
         };
 
         return configuracao;
+    }
+
+    public int ObterSetsNecessariosParaVitoria()
+    {
+        return (MelhorDeSets / 2) + 1;
     }
 
     protected override IEnumerable<object?> GetEqualityComponents()
@@ -160,6 +183,8 @@ public class ConfiguracaoTorneio : ValueObject
         yield return PontuacaoDerrota;
         yield return PontuacaoEmpate;
         yield return PontuacaoWO;
+        yield return PontuacaoSetVencido;
+        yield return MelhorDeSets;
         yield return PermiteEmpate;
     }
 }

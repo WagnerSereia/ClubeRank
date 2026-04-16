@@ -296,6 +296,19 @@ internal sealed class InMemoryConfrontoRepository : IConfrontoRepository
         return Task.CompletedTask;
     }
 
+    public Task<IEnumerable<Confronto>> ListarRealizadosPorOrganizacao(Guid organizacaoId)
+    {
+        var confrontos = _confrontos.Values
+            .Where(confronto =>
+                confronto.TenantId == organizacaoId &&
+                confronto.Status == StatusConfronto.Realizado)
+            .OrderByDescending(confronto => confronto.DataAgendamento)
+            .ToArray()
+            .AsEnumerable();
+
+        return Task.FromResult(confrontos);
+    }
+
     public Task<IEnumerable<Confronto>> ObterConfrontosEntreAtletasNoTorneio(Guid atletaAId, Guid atletaBId, Guid torneioId)
     {
         var confrontos = _confrontos.Values

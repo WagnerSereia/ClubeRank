@@ -39,6 +39,7 @@ Use os artefatos em `/spec` como fonte única de verdade. Os principais document
    - Aplicar critérios de proximidade de ranking e evitar repetição quando possível
 7. Registro de resultados de confrontos
    - Registrar vitória, derrota, empate e WO
+   - Permitir lançamento detalhado por sets e games
    - Atualizar ranking e histórico de atletas
    - Validar resultado somente para confrontos agendados
 8. Auditoria básica
@@ -70,10 +71,11 @@ Use os artefatos em `/spec` como fonte única de verdade. Os principais document
 - Obter ranking ordenado por pontuação desc
 - Exibir variação de pontuação e próximo confronto agendado
 - Permitir filtro por categoria, sexo e período
+- Exibir critérios de desempate por sets vencidos e saldo de games
 - Mostrar histórico de confrontos do atleta com data, adversário, resultado, pontuação antes/depois
 
 ### Torneios e confrontos
-- Criar torneio com: nome, tipo (`Ladder`, `RoundRobin`), categoria, data de início/fim, pontuação por vitória/derrota/WO
+- Criar torneio com: nome, tipo (`Ladder`, `RoundRobin`), categoria, data de início/fim, pontuação por vitória/derrota/WO, pontuação por set vencido e formato melhor de N sets
 - Associar atletas elegíveis ao torneio
 - Gerar confrontos usando algoritmo inicial baseado em proximidade de ranking
 - Garantir que cada atleta tenha no máximo 1 confronto por dia
@@ -82,15 +84,20 @@ Use os artefatos em `/spec` como fonte única de verdade. Os principais document
 ### Registro de resultados
 - Registrar resultado para confronto agendado
 - Suportar tipos: vitória, derrota, empate, WO
+- Permitir informar placar detalhado por set com número do set, games de cada atleta e indicação de tie-break
+- Inferir vencedor automaticamente a partir do placar quando os sets forem informados
 - Exigir justificativa para WO
 - Atualizar ranking imediatamente e registrar auditoria
 - Bloquear registro duplicado de resultado
 
 ## Regras de negócio essenciais
 - Pontuação padrão: vitória +10, derrota -5, WO -20
+- Pontuação por set vencido configurável por torneio
+- Formato padrão de confronto: melhor de 3 sets
 - Rating inicial padrão: 1000
 - Limite de pontuação: mínimo 0, máximo 5000
 - Variação mínima de ranking: ±1 ponto
+- Desempate do ranking: pontuação total, depois sets vencidos, depois saldo de games
 - Atleta sem confronto por 30 dias sofre decaimento de -10 pontos a cada semana subsequente até um piso de 900 pontos
 - Critérios de pareamento:
   - proximidade de pontuação

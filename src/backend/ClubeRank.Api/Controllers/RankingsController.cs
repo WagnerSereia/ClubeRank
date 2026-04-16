@@ -11,6 +11,7 @@ namespace ClubeRank.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[ApiExplorerSettings(GroupName = "competicoes")]
 [Authorize(Roles = $"{nameof(PerfilUsuario.SuperAdmin)},{nameof(PerfilUsuario.AdminOrganizacao)},{nameof(PerfilUsuario.GestorAtletas)},{nameof(PerfilUsuario.Auditor)}")]
 public class RankingsController : ControllerBase
 {

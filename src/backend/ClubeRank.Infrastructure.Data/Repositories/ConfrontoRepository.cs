@@ -35,6 +35,17 @@ public class ConfrontoRepository : IConfrontoRepository
         await _dbContext.SaveChangesAsync();
     }
 
+    public async Task<IEnumerable<Confronto>> ListarRealizadosPorOrganizacao(Guid organizacaoId)
+    {
+        return await _dbContext.Confrontos
+            .Include(x => x.AtletaA)
+            .Include(x => x.AtletaB)
+            .Include(x => x.Torneio)
+            .Where(x => x.TenantId == organizacaoId && x.Status == StatusConfronto.Realizado)
+            .OrderByDescending(x => x.DataAgendamento)
+            .ToListAsync();
+    }
+
     public async Task<IEnumerable<Confronto>> ObterConfrontosEntreAtletasNoTorneio(Guid atletaAId, Guid atletaBId, Guid torneioId)
     {
         return await _dbContext.Confrontos
